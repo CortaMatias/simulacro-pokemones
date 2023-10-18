@@ -1,0 +1,65 @@
+<ng-template #spinner>
+    <div class="spinner-container">
+      <img src="assets/loading.gif" alt="Cargando...">
+    </div>
+  </ng-template>
+
+<div class="container m-3 p-3" *ngIf="pokemon; else spinner">
+  <div class="card" >
+    <div class="card-body">
+      <h1 class="card-title">Pokemon: {{ pokemon.name }}</h1>
+      <div class="row p-3">
+        <div class="col-6 p-3">
+          <h2>Imágenes</h2>
+          <div
+            style="
+              height: 500px;
+              overflow-y: auto;
+              border: 1px solid black;
+              border-radius: 5px;
+              margin: 20px;
+            "
+          >
+            <div *ngFor="let image of images">
+              <hr class="text-dark" />
+              <img
+                class="card-img-top"
+                [src]="image"
+                alt="{{ pokemon.name }} image"
+              />
+            </div>
+          </div>
+          <div class="row m-3 p-3">
+            <div class="col p-3">
+              <h2>
+                Peso: <span>{{ pokemon.weight }}</span>
+              </h2>
+            </div>
+            <div class="col p-3">
+              <h2>
+                Altura: <span>{{ pokemon.height }}</span>
+              </h2>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 p-3">
+          <h2>Habilidades</h2>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" *ngFor="let ability of abilities">
+              {{ ability.name }}: {{ ability.effect_entries[0].effect }}
+            </li>
+          </ul>
+          <h2>Estadísticas</h2>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" *ngFor="let stat of pokemon.stats">
+              {{ stat.stat.name }}: {{ stat.base_stat }}
+            </li>
+          </ul>
+       
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+</div>

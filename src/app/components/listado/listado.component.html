@@ -1,0 +1,48 @@
+<div class="container d-flex justify-content-center aling-items-center m-5">
+  <div class="row" *ngIf="!isLoading; else loading">
+    <div class="col-12">
+      <h1>Listado de Pokemones</h1>
+      <select class="form-select" [(ngModel)]="limit" (change)="changeLimit()">
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+      </select>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pokemon of pokemons">
+            <td>{{ pokemon.name }}</td>
+            <td>
+              <button
+                class="btn btn-primary"
+                [routerLink]="['/detalle', pokemon.name]"
+              >
+                Detalle
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item" [class.disabled]="offset === 0">
+            <a class="page-link" (click)="previousPage()">Anterior</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" (click)="nextPage()">Siguiente</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Agrega este bloque -->
+  <ng-template #loading>
+    <img src="assets/loading.gif" alt="Cargando..." />
+  </ng-template>
+</div>
